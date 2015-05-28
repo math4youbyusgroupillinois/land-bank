@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Land-bank by math4youbyusgroupillinois</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Land-bank</h1>
+        <h2>Analytics tool to help the Cook County Land Bank acquire vacant and abandoned properties strategically.</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/math4youbyusgroupillinois/land-bank/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/math4youbyusgroupillinois/land-bank/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/math4youbyusgroupillinois/land-bank" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="abandoned-property-analytics-tool" class="anchor" href="#abandoned-property-analytics-tool" aria-hidden="true"><span class="octicon octicon-link"></span></a>Abandoned property analytics tool</h1>
+
+<p><a href="http://cookcountylandbank.org"><img src="http://dssg.io/img/partners/landbank.jpg" width="400" align="right"></a></p>
+
+<p>An analytics tool to help the Cook County Land Bank acquire vacant and abandoned properties strategically.</p>
+
+<p>This project is a part of the 2013 <a href="http://www.dssg.io">Data Science for Social Good</a> fellowship, in partnership with the <a href="http://www.cookcountylandbank.org">Cook County Land Bank</a> and <a href="http://www.housingstudies.org/">DePaul University Institute for Housing Studies</a>.</p>
+
+<p><em>For a quick and gentle overview of the project, check out our <a href="http://dssg.io/2013/07/11/cook-county-land-bank.html">blog post</a>.</em></p>
+
+<h2>
+<a id="the-problem-vacant-and-abandoned-property" class="anchor" href="#the-problem-vacant-and-abandoned-property" aria-hidden="true"><span class="octicon octicon-link"></span></a>The problem: vacant and abandoned property</h2>
+
+<p>Parts of Cook County have long struggled with vacancy and abandonment, but the recent foreclosure crisis spread these problems into areas which had previously experienced relative stability. 
+Many of the properties that went into foreclosure ended up becoming vacant because the residents would abandon the property long before the foreclosure process was completed. </p>
+
+<p>These abandoned homes can lower property values, serve as magnets for crime and decay, and reduce tax revenues.</p>
+
+<p><strong><a href="http://dssg.io/2013/07/11/cook-county-land-bank.html">Read more about the abandoned property problem on our blog</a></strong></p>
+
+<h2>
+<a id="the-solution-analytics-web-tool-to-target-properties" class="anchor" href="#the-solution-analytics-web-tool-to-target-properties" aria-hidden="true"><span class="octicon octicon-link"></span></a>The solution: analytics web tool to target properties</h2>
+
+<p>The Cook County Land Bank Authority (CCLBA) was created in January 2013 with the goal of returning these properties to productive use. The agency won't have the resources to invest in every property, and the appropriate policy strategies from community to community.</p>
+
+<p><img src="https://raw.github.com/dssg/dssg.github.io/master/img/posts/land-bank-screenshot.png" alt="web app screenshot"></p>
+
+<p>Our purpose was to create a web tool to view and understand Cook County's property data, and to analyze it in order to help the CCLBA develop its policy strategies.</p>
+
+<ol>
+<li>Build a usable web interface for both public use and for use by land bank employees that interfaces with a Postgres database in order to organize, query, and access the data in a convenient manner.</li>
+<li>Create a model that will determine the critera by which the Cook County Land Bank which neighborhoods to help first, which properties in that neighborhood, and their potential new uses.</li>
+</ol>
+
+<p><strong><a href="../../wiki/Analysis">Read more about our analysis in the wiki</a></strong></p>
+
+<h2>
+<a id="the-data-property-and-building-data-from-cook-county-and-the-city-of-chicago" class="anchor" href="#the-data-property-and-building-data-from-cook-county-and-the-city-of-chicago" aria-hidden="true"><span class="octicon octicon-link"></span></a>The data: property and building data from Cook County and the City of Chicago</h2>
+
+<ul>
+<li>Property data from the Cook County Assessor and Recorder of Deeds, courtsety of the Institute for Housing Studies</li>
+<li>Cook County parcel shapefile from County GIS department</li>
+<li>City of Chicago open data portal datasets</li>
+<li>ACS demographic data from the Census Bureau</li>
+<li>Brownfield data from the EPA</li>
+</ul>
+
+<p><strong><a href="../../wiki/Data">Read more about the data we used in the wiki</a></strong></p>
+
+<h2>
+<a id="project-layout" class="anchor" href="#project-layout" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project layout</h2>
+
+<ul>
+<li>
+<code>analysis</code>: exploratory data analsys of real estate and demographic tends in Cook County.</li>
+<li>
+<code>web</code>: a django app that implements the analytics tool and a data API backend to power this tool.</li>
+</ul>
+
+<p><strong><a href="../../wiki">Read more about the analysis and webapp in the wiki</a></strong></p>
+
+<h2>
+<a id="installation-guide" class="anchor" href="#installation-guide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation guide</h2>
+
+<p>Here's the software you'll need to install:</p>
+
+<ul>
+<li>GIS software: ArcGIS 10.1 or QGIS</li>
+<li>Postgres 9.1</li>
+<li>PostGIS</li>
+<li>Python 2.7.x</li>
+<li>Numpy  1.7.1</li>
+<li>Sympy  0.7.2</li>
+</ul>
+
+<p>Next, clone the repository and configure Django to enable South and TastyPie, and to interface with your Postgres database.</p>
+
+<p>Then, run an initial South migration to create database tables/views:</p>
+
+<pre><code>$ python manage.py schemamigration landbank_data --initial
+$ python manage.py migrate landbank_data
+</code></pre>
+
+<p>Finally, modify and run load_*.py scripts with desired input files to populate base tables.</p>
+
+<h2>
+<a id="team" class="anchor" href="#team" aria-hidden="true"><span class="octicon octicon-link"></span></a>Team</h2>
+
+<p><img src="https://raw.github.com/dssg/dssg.github.io/761993c24ea2991170ef64048115cb805f5f13fb/img/people/teams/landbank.png" alt="Team"></p>
+
+<h2>
+<a id="contributing-to-the-project" class="anchor" href="#contributing-to-the-project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing to the project</h2>
+
+<p>To get involved, please check the <a href="https://github.com/dssg/bikeshare/issues">issue tracker</a>.</p>
+
+<p>To get in touch, email Tom Plagge at <a href="mailto:tplagge@gmail.com">tplagge@gmail.com</a>.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Copyright (C) 2013 <a href="http://dssg.io">Data Science for Social Good Fellowship at the University of Chicago</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
